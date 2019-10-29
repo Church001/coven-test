@@ -1,5 +1,6 @@
 import { TEST_CONSTANT } from "../Constants";
 import axios from "axios";
+import history from "../../utils/history";
 
 export const testAction = () => dispatch => {
     dispatch({
@@ -9,7 +10,9 @@ export const testAction = () => dispatch => {
 }
 
 export const loginAction = data => dispatch => {
-    console.log("LOGIN DATA", data)
+    console.log("LOGIN DATA", history)
+    history.push("/")
+
 }
 
 export const fetchAllFlights = () => {

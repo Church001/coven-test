@@ -13,17 +13,18 @@ import { connect } from 'react-redux';
 
 class Routerr extends Component {
     constructor(props){
-        super(props)
-        this.state = {
-            isAuthenticated: false
-        }
+        super(props);
     }
-    
+
     componentDidMount(){
         console.log("AUTH", this.props.auth)
+        this.setState({
+            isAuthenticated: this.props.auth.isAuthenticated
+        })
     }
 
     render(){
+        console.log("AUTHENTATION", this.state)
         return (
             <Router>
                 <Switch>
@@ -33,8 +34,8 @@ class Routerr extends Component {
                         component={Login}
                     />
                     <ProtectedRoute
-                        isAuthenticated={this.state.isAuthenticated}
                         exact
+                        isAuthenticated={this.props.auth.isAuthenticated}
                         path="/"
                         component={Dashboard}
                     />
