@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
+import Navbarr from '../components/Navbar';
+import Typography from '@material-ui/core/Typography';
+import Container from '@material-ui/core/Container';
 
 class Dashboard extends Component {
 
@@ -10,7 +13,10 @@ class Dashboard extends Component {
     render() {
         return (
             <div>
-                <h1>Dashboard</h1>
+                <Navbarr/> 
+                <Container maxWidth="xs=12">
+                    <Typography component="div" style={{ backgroundColor: '#ffffff', height: '100vh' }} />
+                </Container>
             </div>
         )
     }

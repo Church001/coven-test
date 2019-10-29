@@ -1,7 +1,6 @@
 import React,{ Component } from 'react'
 import { 
-    Route, 
-    Link, 
+    Route,
     Switch,
     BrowserRouter as Router 
 } from 'react-router-dom'
@@ -16,21 +15,13 @@ class Routerr extends Component {
         super(props);
     }
 
-    componentDidMount(){
-        console.log("AUTH", this.props.auth)
-        this.setState({
-            isAuthenticated: this.props.auth.isAuthenticated
-        })
-    }
-
     render(){
-        console.log("AUTHENTATION", this.state)
         return (
             <Router>
                 <Switch>
                     <Route
-                        exact
                         path="/login"
+                        exact
                         component={Login}
                     />
                     <ProtectedRoute

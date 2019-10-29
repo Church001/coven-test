@@ -1,4 +1,4 @@
-import { TEST_CONSTANT } from "../Constants";
+import { TEST_CONSTANT, LOGIN } from "../Constants";
 import axios from "axios";
 import history from "../../utils/history";
 
@@ -11,8 +11,12 @@ export const testAction = () => dispatch => {
 
 export const loginAction = data => dispatch => {
     console.log("LOGIN DATA", history)
+    const data = "logged in"
+    localStorage.setItem("token-coven",data )
+    dispatch({
+        type: LOGIN
+    })
     history.push("/")
-
 }
 
 export const fetchAllFlights = () => {
