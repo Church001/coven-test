@@ -5,7 +5,7 @@ import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import { connect } from 'react-redux';
 import Button from '@material-ui/core/Button';
-import { clearAirport } from '../redux/actions/action';
+import { clearAirport, fetchAllFlights } from '../redux/actions/action';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import Card from '@material-ui/core/Card';
@@ -61,7 +61,6 @@ const useStyles = makeStyles(theme => ({
   },
   textField: {
     marginLeft: theme.spacing(1),
-    // marginRight: theme.spacing(1),
     width: 250,
   },
 }));
@@ -72,6 +71,9 @@ const MyModal = (props) => {
   
   const { airport } = props.airport
   useEffect(() => {
+    if(props.airport.airport){
+      console.log(props.airport.airport.icao)
+    }  
     if(airport !== null){
       setOpen(true)
     }
@@ -80,6 +82,18 @@ const MyModal = (props) => {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const fetchData = () => {
+    let now = new Date();
+    const data = {
+      username: 'demo',
+      password: 'demo',
+      begin: Math.floor(now.getTime()/1000),
+      end:Math.floor(now.getTime()/1000)+(20*60),
+      airport: props.airport.airport.icao
+    }
+    props.fetchAllFlights(data)
+  }
 
   return (
     <div>
@@ -106,14 +120,14 @@ const MyModal = (props) => {
               Close
             </Button>
             <h2 id="transition-modal-title">{open ? airport.city: ""}</h2>
-            {/* <p id="transition-modal-description">react-transition-group animates me.</p> */}
+            <p id="transition-modal-description">AIRPORT ICAO: {open ? " "+airport.icao:""}</p>
             <div className={classes.root}>
-             <div>
+             <div className={classes.gridList}>
                
               <div>
                 <TextField
                   id="filled-number"
-                  label="Number"
+                  label="Interval"
                   type="number"
                   className={classes.textField}
                   InputLabelProps={{
@@ -125,19 +139,19 @@ const MyModal = (props) => {
                 <Button
                     type="submit"
                     fullWidth
-                    variant="contained"
+                    // variant="contained"
                     color="primary"
                     className={classes.submit}
                     size='small'
-                    // onClick={submission}
+                    onClick={fetchData}
                 >
-                    Fetch
+                    Fetch Arrival
                 </Button>
               </div>
               <div>
                 <TextField
                   id="filled-number"
-                  label="Number"
+                  label="Interval"
                   type="number"
                   className={classes.textField}
                   InputLabelProps={{
@@ -149,18 +163,18 @@ const MyModal = (props) => {
                  <Button
                     type="submit"
                     fullWidth
-                    variant="contained"
+                    // variant="contained"
                     color="primary"
                     className={classes.submit}
                     // onClick={submission}
                 >
-                    Fetch
+                    Fetch Departure
                 </Button>
               </div>             
              </div>
               <GridList cellHeight={160} className={classes.gridList} cols={1}>
                   <GridListTile >
-                    <h1>HEAD</h1>
+                    <h1>AIRLINES</h1>
                   </GridListTile>
               </GridList>
             </div>
@@ -177,4 +191,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, { clearAirport })(MyModal);
+export default connect(mapStateToProps, { clearAirport, fetchAllFlights })(MyModal);

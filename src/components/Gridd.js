@@ -32,7 +32,7 @@ const MyGrid = (props) => {
     
   const classes = useStyles();
   const { data } = props
-  console.log(data)
+  // console.log(data)
   return (
     <div className={classes.root}>
       <GridList cellHeight={280} cols={3} className={classes.gridList}>

@@ -12,7 +12,7 @@ export const loginAction = data => dispatch => {
 }
 
 export const fetchAllFlights = data => dispatch => {
-    const URL = `https://${data.username}:${data.password}@opensky-network.org/api/flights/all?begin=${data.begin}&end=${data.end}`
+    const URL = `https://${data.username}:${data.password}@opensky-network.org/api/flights/arrival?airport=${data.airport}&begin=${data.begin}&end=${data.end}`
     axios.get(URL)
         .then(res => {
             console.log(res.data)

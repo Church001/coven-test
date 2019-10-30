@@ -9,19 +9,6 @@ import MyGrid from '../components/Gridd';
 
 
 class Dashboard extends Component {
-
-    componentDidMount(){
-        let t = 1200000
-        let now = new Date();
-        const data = {
-            username: 'demo',
-            password: 'demo',
-            begin: '1517227200',
-            end:'1517230800'
-        }
-        this.props.fetchAllFlights(data)
-    }   
-
     render() {
         return (
             <div>
@@ -46,7 +33,8 @@ class Dashboard extends Component {
 
 const mapStateToProps = state => {
     return {
-        cities: state.cities
+        cities: state.cities,
+        airport: state.reducer
     }
 }
 

@@ -1,7 +1,8 @@
 import { CLICKED_AIRPORT, CLOSE_MODAL } from "../Constants";
 
 const initialState = {
-    airport: null
+    airport: null,
+    airlines:[]
 }
 
 export const reducer = (state = initialState, action) => {
