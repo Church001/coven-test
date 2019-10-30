@@ -35,8 +35,8 @@ const MyGrid = (props) => {
   console.log(data)
   return (
     <div className={classes.root}>
-      <GridList cellHeight={180} className={classes.gridList}>
-        <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
+      <GridList cellHeight={280} cols={3} className={classes.gridList}>
+        <GridListTile key="Subheader" cols={3} style={{ height: 'auto' }}>
           <h1 >10 MAJOR CITIES</h1>
         </GridListTile>
         {data.map(city => (
