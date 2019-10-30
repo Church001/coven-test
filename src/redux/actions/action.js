@@ -19,7 +19,6 @@ export const fetchAllFlights = data => dispatch => {
     }
     else {
         URL = `https://${data.username}:${data.password}@opensky-network.org/api/flights/departure?airport=${data.airport}&begin=${data.begin}&end=${data.end}`
-
     }
     axios.get(URL)
         .then(res => {

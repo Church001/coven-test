@@ -130,7 +130,7 @@ const MyModal = (props) => {
               <div>
                 <TextField
                   id="filled-number"
-                  label="Interval"
+                  label="Set Interval"
                   type="number"
                   className={classes.textField}
                   InputLabelProps={{
@@ -155,11 +155,11 @@ const MyModal = (props) => {
               <div>
                 <TextField
                   id="filled-number"
-                  label="Interval"
+                  label="Set Interval"
                   type="number"
                   className={classes.textField}
                   InputLabelProps={{
-                    shrink: true,
+                    shrink: false,
                   }}
                   margin="normal"
                   variant="filled"
@@ -177,15 +177,13 @@ const MyModal = (props) => {
               </div>             
              </div>
               <GridList cellHeight={160} className={classes.gridList} cols={1}>
-                {
+                { false &&
                   <GridListTile>
                     <h1>FLIGHTS</h1>
                   </GridListTile>
                 }
                 {
-                  <GridListTile>
-                    <h4>loading...</h4>
-                  </GridListTile> 
+                  <h2>loading...</h2>
                 }
               </GridList>
             </div>
