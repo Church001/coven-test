@@ -8,12 +8,12 @@ import Button from '@material-ui/core/Button';
 import { clearAirport, fetchAllFlights } from '../redux/actions/action';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Typography from '@material-ui/core/Typography';
+// import Card from '@material-ui/core/Card';
+// import CardActionArea from '@material-ui/core/CardActionArea';
+// import CardActions from '@material-ui/core/CardActions';
+// import CardContent from '@material-ui/core/CardContent';
+// import CardMedia from '@material-ui/core/CardMedia';
+// import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import { Grid } from '@material-ui/core';
 
@@ -77,20 +77,23 @@ const MyModal = (props) => {
     if(airport !== null){
       setOpen(true)
     }
+    console.log(props.airport)
   }, [props.airport])
 
   const handleClose = () => {
     setOpen(false);
   };
 
-  const fetchData = () => {
+  const fetchData = (name) => {
+    // console.log(name)
     let now = new Date();
     const data = {
       username: 'demo',
       password: 'demo',
-      begin: Math.floor(now.getTime()/1000),
-      end:Math.floor(now.getTime()/1000)+(20*60),
-      airport: props.airport.airport.icao
+      begin: '1517227200',//Math.floor(now.getTime()/1000),
+      end: '1517230800',//Math.floor(now.getTime()/1000)+(20*60),
+      airport: props.airport.airport.icao,
+      type:name.name
     }
     props.fetchAllFlights(data)
   }
@@ -131,7 +134,7 @@ const MyModal = (props) => {
                   type="number"
                   className={classes.textField}
                   InputLabelProps={{
-                    shrink: true,
+                    shrink: false,
                   }}
                   margin="normal"
                   variant="filled"
@@ -143,7 +146,8 @@ const MyModal = (props) => {
                     color="primary"
                     className={classes.submit}
                     size='small'
-                    onClick={fetchData}
+                    name="arrival"
+                    onClick={() => fetchData({name:'arrival'})}
                 >
                     Fetch Arrival
                 </Button>
@@ -166,16 +170,23 @@ const MyModal = (props) => {
                     // variant="contained"
                     color="primary"
                     className={classes.submit}
-                    // onClick={submission}
+                    onClick={() => fetchData({name:'departure'})}
                 >
                     Fetch Departure
                 </Button>
               </div>             
              </div>
               <GridList cellHeight={160} className={classes.gridList} cols={1}>
-                  <GridListTile >
-                    <h1>AIRLINES</h1>
+                {
+                  <GridListTile>
+                    <h1>FLIGHTS</h1>
                   </GridListTile>
+                }
+                {
+                  <GridListTile>
+                    <h4>loading...</h4>
+                  </GridListTile> 
+                }
               </GridList>
             </div>
           </Grid>
