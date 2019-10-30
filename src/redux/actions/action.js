@@ -1,16 +1,8 @@
-import { TEST_CONSTANT, LOGIN } from "../Constants";
+import { LOGIN } from "../Constants";
 import axios from "axios";
 import history from "../../utils/history";
 
-export const testAction = () => dispatch => {
-    dispatch({
-        type: TEST_CONSTANT,
-        payload: 'TEST VALUE'
-    })
-}
-
 export const loginAction = data => dispatch => {
-    console.log("LOGIN DATA", history)
     const data = "logged in"
     localStorage.setItem("token-coven",data )
     dispatch({
@@ -19,10 +11,11 @@ export const loginAction = data => dispatch => {
     history.push("/")
 }
 
-export const fetchAllFlights = () => {
-    axios.get()
+export const fetchAllFlights = data => dispatch => {
+    const URL = `https://${data.username}:${data.password}@opensky-network.org/api/flights/all?begin=${data.begin}&end=${data.end}`
+    axios.get(URL)
         .then(res => {
-            console.log(res)
+            console.log(res.data)
         })
         .catch(err => {
             console.log(err)

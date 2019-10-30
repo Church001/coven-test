@@ -1,2 +1,2 @@
 
-export const BASE_URL = 'https://opensky-network.org/api';
+export const BASE_URL = 'https://demo:demo@opensky-network.org/api';
