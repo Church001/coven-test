@@ -1,4 +1,4 @@
-import { LOGIN } from "../Constants";
+import { LOGIN, CLICKED_AIRPORT, CLOSE_MODAL } from "../Constants";
 import axios from "axios";
 import history from "../../utils/history";
 
@@ -21,3 +21,16 @@ export const fetchAllFlights = data => dispatch => {
             console.log(err)
         })
 } 
+
+export const clickAirport = data => dispatch => {
+    dispatch({
+        type: CLICKED_AIRPORT,
+        payload: data
+    })
+}
+
+export const clearAirport = () => dispatch => {
+    dispatch({
+        type: CLOSE_MODAL
+    })
+}

@@ -14,9 +14,6 @@ class Dashboard extends Component {
     componentDidMount(){
         let t = 1200000
         let now = new Date();
-        // let newNow = now + t
-        console.log("NOW", now.getTime())
-        console.log("ASSUMED 20 MINUTES AGO", now.setMinutes(20))
         const data = {
             username: 'demo',
             password: 'demo',
@@ -27,9 +24,6 @@ class Dashboard extends Component {
     }   
 
     render() {
-        const someData = {
-            text:"sme sme"
-        }
         return (
             <div>
                 <Navbarr/> 
@@ -40,21 +34,11 @@ class Dashboard extends Component {
                             backgroundColor: '#ffffff', 
                             height: '100vh' 
                         }} >
-                        <h1>Flights</h1>
-                        <Button 
-                            variant="contained" 
-                            color="primary" 
-                            onClick={() => alert("IT WS CLICKED")}
-                        >
-                            Modal
-                        </Button>
                         <MyGrid
                             data={this.props.cities}
                         />
                     </Typography>
-                    <MyModal
-                        data={someData}
-                    />
+                    <MyModal/>
                 </Container>
             </div>
         )

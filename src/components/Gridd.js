@@ -3,6 +3,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
+import { clickAirport } from '../redux/actions/action';
+import { connect } from 'react-redux';
+
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -22,8 +25,11 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-  
 const MyGrid = (props) => {
+  const onClickAirport = data => {
+    props.clickAirport(data)
+  }
+    
   const classes = useStyles();
   const { data } = props
   console.log(data)
@@ -35,7 +41,7 @@ const MyGrid = (props) => {
         </GridListTile>
         {data.map(city => (
           <GridListTile 
-            onClick={() => alert("THIS CITY HAS BEEN CLICKED")}
+            onClick={() => onClickAirport(city)}
             key={city.icao}>
             <img src={city.img} alt={city.city} />
             <GridListTileBar
@@ -48,4 +54,4 @@ const MyGrid = (props) => {
   );
 }
 
-export default MyGrid;
+export default connect(null, { clickAirport })(MyGrid);

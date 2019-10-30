@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
+import { connect } from 'react-redux';
+import Button from '@material-ui/core/Button';
+import { clearAirport } from '../redux/actions/action';
 
 const useStyles = makeStyles(theme => ({
   modal: {
@@ -22,13 +25,14 @@ const useStyles = makeStyles(theme => ({
 
 const MyModal = (props) => {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
   
-  console.log("PROPS", props)
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
+  const { airport } = props.airport
+  useEffect(() => {
+    if(airport !== null){
+      setOpen(true)
+    }
+  }, [props.airport])
 
   const handleClose = () => {
     setOpen(false);
@@ -50,8 +54,15 @@ const MyModal = (props) => {
       >
         <Fade in={open}>
           <div className={classes.paper}>
-            <h2 id="transition-modal-title">Transition modal</h2>
+            <h2 id="transition-modal-title">{open ? airport.city: ""}</h2>
             <p id="transition-modal-description">react-transition-group animates me.</p>
+            <Button 
+                variant="contained" 
+                color="primary" 
+                onClick={() => handleClose()}
+            >
+                Close
+            </Button>
           </div>
         </Fade>
       </Modal>
@@ -59,4 +70,10 @@ const MyModal = (props) => {
   );
 }
 
-export default MyModal;
+const mapStateToProps = state => {
+  return {
+    airport: state.reducer
+  }
+}
+
+export default connect(mapStateToProps, { clearAirport })(MyModal);
